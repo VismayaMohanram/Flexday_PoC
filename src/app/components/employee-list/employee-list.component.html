@@ -1,0 +1,105 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+    <h1 class="text-4xl font-extrabold mb-6 text-center text-gray-900">
+      Employee Directory
+    </h1>
+  
+    <!-- Search Bar -->
+    <div class="mb-6 flex justify-center">
+      <input
+        type="text"
+        placeholder="Search employees by name..."
+        class="p-3 border rounded-lg w-1/2 focus:outline-none focus:ring focus:ring-blue-500 shadow-md"
+        [(ngModel)]="searchQuery"
+        (input)="filterEmployees()"
+      />
+    </div>
+  
+    <!-- Employee Table -->
+    <div class="overflow-x-auto shadow-lg rounded-lg bg-white">
+      <table class="table-auto w-full">
+        <thead class="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+          <tr>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Profile</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Name</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Work Email</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Gender</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Date of Birth</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Start Date</th>
+            <th class="px-6 py-3 text-left text-lg font-semibold">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let employee of paginatedEmployees"
+            class="border-b hover:bg-gray-50 transition"
+          >
+            <!-- Profile Initials -->
+            <td class="px-6 py-4">
+              <div
+                class="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-lg font-bold"
+              >
+                {{ getInitials(employee.display_full_name) }}
+              </div>
+            </td>
+  
+            <!-- Name -->
+            <td class="px-6 py-4 text-gray-700 font-medium">
+              {{ employee.display_full_name }}
+            </td>
+  
+            <!-- Work Email -->
+            <td class="px-6 py-4 text-gray-600">
+              {{ employee.work_email || 'N/A' }}
+            </td>
+  
+            <!-- Gender -->
+            <td class="px-6 py-4 text-gray-600">
+              {{ employee.gender || 'Not Specified' }}
+            </td>
+  
+            <!-- Date of Birth -->
+            <td class="px-6 py-4 text-gray-600">
+              {{ employee.date_of_birth | date: 'mediumDate' }}
+            </td>
+  
+            <!-- Start Date -->
+            <td class="px-6 py-4 text-gray-600">
+              {{ employee.hire_date || employee.start_date | date: 'mediumDate' }}
+            </td>
+  
+            <!-- View Details Button -->
+            <td class="px-6 py-4">
+              <button
+                class="bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg hover:from-green-500 hover:to-green-700"
+                (click)="goToEmployeeDetails(employee.id)"
+              >
+                View Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="mt-6 flex justify-center space-x-4">
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50"
+        [disabled]="currentPage === 1"
+        (click)="previousPage()"
+      >
+        Previous
+      </button>
+      <span class="text-lg font-medium text-gray-700">
+        Page {{ currentPage }} of {{ totalPages }}
+      </span>
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50"
+        [disabled]="currentPage === totalPages"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+  

@@ -1,0 +1,26 @@
+body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2 {
+    font-weight: bold;
+  }
+  
+  p {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+  }
+  
+  p strong {
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, #4c51bf, #6b46c1);
+  }
+  
+  .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  

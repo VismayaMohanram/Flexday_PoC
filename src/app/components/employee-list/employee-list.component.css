@@ -1,0 +1,29 @@
+/* Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  thead th {
+    padding: 16px;
+    text-align: left;
+  }
+  
+  tbody tr {
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  tbody tr:hover {
+    background-color: #f9fafb;
+  }
+  
+  td {
+    padding: 16px;
+    vertical-align: middle;
+  }
+  
+  /* Pagination Controls */
+  button:disabled {
+    cursor: not-allowed;
+  }
+  

@@ -1,0 +1,116 @@
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Add Employee</h1>
+  
+    <form (ngSubmit)="addEmployee()" #employeeForm="ngForm">
+      <!-- Remote ID -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Remote ID</label>
+        <input
+          type="text"
+          [(ngModel)]="employee.remote_id"
+          name="remote_id"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- Employee Number -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Employee Number</label>
+        <input
+          type="text"
+          [(ngModel)]="employee.employee_number"
+          name="employee_number"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- First Name -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">First Name</label>
+        <input
+          type="text"
+          [(ngModel)]="employee.first_name"
+          name="first_name"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- Last Name -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Last Name</label>
+        <input
+          type="text"
+          [(ngModel)]="employee.last_name"
+          name="last_name"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- Work Email -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Work Email</label>
+        <input
+          type="email"
+          [(ngModel)]="employee.work_email"
+          name="work_email"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- Gender -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Gender</label>
+        <select
+          [(ngModel)]="employee.gender"
+          name="gender"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        >
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+  
+      <!-- Date of Birth -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Date of Birth</label>
+        <input
+          type="date"
+          [(ngModel)]="employee.date_of_birth"
+          name="date_of_birth"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+  
+      <!-- Employment Status -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Employment Status</label>
+        <select
+          [(ngModel)]="employee.employment_status"
+          name="employment_status"
+          class="w-full p-2 border border-gray-300 rounded"
+          required
+        >
+          <option value="ACTIVE">Active</option>
+          <option value="PENDING">Pending</option>
+          <option value="TERMINATED">Terminated</option>
+        </select>
+      </div>
+  
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+      >
+        Add Employee
+      </button>
+    </form>
+  </div>
+  

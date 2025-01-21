@@ -1,0 +1,113 @@
+<div class="p-6 bg-gradient-to-b from-gray-100 to-gray-300 min-h-screen">
+    <header class="flex items-center justify-between mb-8">
+      <h1 class="text-4xl font-extrabold text-indigo-700">Flexday Dashboard</h1>
+      <button
+        class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-all"
+        (click)="refreshDashboard()"
+      >
+        Refresh
+      </button>
+    </header>
+  
+    <!-- Summary Section -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div
+        class="bg-white shadow-lg p-6 rounded-lg border-t-4 flex items-center justify-between border-indigo-600"
+      >
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">Total Employees</h2>
+          <p class="text-4xl font-bold text-indigo-700 mt-4">{{ totalEmployees }}</p>
+        </div>
+      </div>
+  
+      <div
+        class="bg-white shadow-lg p-6 rounded-lg border-t-4 flex items-center justify-between border-green-600"
+      >
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">Active Employees</h2>
+          <p class="text-4xl font-bold text-green-700 mt-4">{{ activeEmployees }}</p>
+        </div>
+      </div>
+  
+      <div
+        class="bg-white shadow-lg p-6 rounded-lg border-t-4 flex items-center justify-between border-yellow-600"
+      >
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">Pending Employees</h2>
+          <p class="text-4xl font-bold text-yellow-700 mt-4">{{ pendingEmployees }}</p>
+        </div>
+      </div>
+  
+      <div
+        class="bg-white shadow-lg p-6 rounded-lg border-t-4 flex items-center justify-between border-red-600"
+      >
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">Terminated Employees</h2>
+          <p class="text-4xl font-bold text-red-700 mt-4">{{ terminatedEmployees }}</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Interactive Charts Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      <div class="bg-white shadow-lg p-6 rounded-lg">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Employment Status Distribution</h2>
+        <canvas id="statusChart"></canvas>
+      </div>
+  
+      <div class="bg-white shadow-lg p-6 rounded-lg">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Employees by Location</h2>
+        <canvas id="locationsChart"></canvas>
+      </div>
+    </section>
+  
+    <!-- Group Insights Section -->
+    <section class="bg-white shadow-lg p-6 rounded-lg mb-10">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Group Insights</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          *ngFor="let group of groups"
+          class="bg-indigo-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+          <h3 class="text-md font-bold text-indigo-800">{{ group.name }}</h3>
+          <p class="text-sm text-gray-600 mt-1">Type: {{ group.type }}</p>
+          <p class="text-sm text-gray-600 mt-1">Team: {{ group.is_commonly_used_as_team ? 'Yes' : 'No' }}</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Recent Employees Section -->
+    <section class="bg-white shadow-lg p-6 rounded-lg">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Employees</h2>
+      <table class="w-full border rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-2 text-left font-semibold text-gray-600">Name</th>
+            <th class="p-2 text-left font-semibold text-gray-600">Work Email</th>
+            <th class="p-2 text-left font-semibold text-gray-600">Status</th>
+            <th class="p-2 text-left font-semibold text-gray-600">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of recentEmployees" class="hover:bg-gray-100">
+            <td class="p-2">{{ employee.display_full_name }}</td>
+            <td class="p-2">{{ employee.work_email }}</td>
+            <td class="p-2">
+              <span
+                class="px-3 py-1 rounded-full text-sm font-medium"
+                [ngClass]="{
+                  'bg-green-100 text-green-700': employee.employment_status === 'ACTIVE',
+                  'bg-yellow-100 text-yellow-700': employee.employment_status === 'PENDING',
+                  'bg-red-100 text-red-700': employee.employment_status === 'TERMINATED'
+                }"
+              >
+                {{ employee.employment_status }}
+              </span>
+            </td>
+            <td class="p-2">{{ locationNames[employee.work_location] || 'Unknown' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  

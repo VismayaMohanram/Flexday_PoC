@@ -1,0 +1,76 @@
+<div class="min-h-screen bg-gray-50 py-12 flex justify-center">
+    <div class="w-full max-w-5xl bg-white shadow-2xl rounded-lg overflow-hidden">
+      <!-- Header Section -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-8 text-white flex items-center">
+        <!-- Profile Initials -->
+        <div
+          class="w-24 h-24 rounded-full bg-white text-indigo-600 flex items-center justify-center text-4xl font-bold shadow-md"
+        >
+          {{ getInitials(employee.display_full_name) }}
+        </div>
+        <!-- Employee Name and Status -->
+        <div class="ml-6">
+          <h1 class="text-4xl font-bold">{{ employee.display_full_name }}</h1>
+          <p class="text-lg mt-2">
+            <span
+              class="inline-block px-4 py-1 rounded-lg font-semibold"
+              [ngClass]="{
+                'bg-green-500 text-white': employee.employment_status === 'ACTIVE',
+                'bg-yellow-400 text-gray-800': employee.employment_status === 'PENDING',
+                'bg-red-500 text-white': employee.employment_status === 'TERMINATED'
+              }"
+            >
+              {{ employee.employment_status }}
+            </span>
+          </p>
+        </div>
+      </div>
+  
+      <!-- Details Section -->
+      <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Personal Information -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">
+            Personal Information
+          </h2>
+          <p><strong>First Name:</strong> {{ employee.first_name }}</p>
+          <p><strong>Last Name:</strong> {{ employee.last_name }}</p>
+          <p><strong>Gender:</strong> {{ employee.gender || 'Not Specified' }}</p>
+          <p><strong>Date of Birth:</strong> {{ employee.date_of_birth | date: 'mediumDate' }}</p>
+          <p><strong>Ethnicity:</strong> {{ employee.ethnicity || 'Not Specified' }}</p>
+          <p><strong>Marital Status:</strong> {{ employee.marital_status || 'Not Specified' }}</p>
+        </div>
+  
+        <!-- Employment Information -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">
+            Employment Information
+          </h2>
+          <p><strong>Employee Number:</strong> {{ employee.employee_number }}</p>
+          <p><strong>Start Date:</strong> {{ employee.start_date | date: 'mediumDate' }}</p>
+          <p><strong>Hire Date:</strong> {{ employee.hire_date || 'N/A' }}</p>
+          <p><strong>Manager:</strong> {{ manager?.display_full_name || 'Not Assigned' }}</p>
+        </div>
+  
+        <!-- Contact Information -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">
+            Contact Information
+          </h2>
+          <p><strong>Work Email:</strong> {{ employee.work_email || 'N/A' }}</p>
+          <p><strong>Personal Email:</strong> {{ employee.personal_email || 'N/A' }}</p>
+          <p><strong>Mobile Phone:</strong> {{ employee.mobile_phone_number || 'N/A' }}</p>
+        </div>
+  
+        <!-- Location Information -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">
+            Location Information
+          </h2>
+          <p><strong>Work Location:</strong> {{ workLocation?.name || 'Not Specified' }}</p>
+          <p><strong>Home Location:</strong> {{ homeLocation?.name || 'Not Specified' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
