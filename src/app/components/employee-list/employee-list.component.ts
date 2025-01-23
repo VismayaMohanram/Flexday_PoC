@@ -45,7 +45,7 @@ export class EmployeeListComponent implements OnInit {
   filterEmployees(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredEmployees = this.employees.filter((employee) =>
-      employee.display_full_name.toLowerCase().includes(query)
+      employee.display_full_name?.toLowerCase().includes(query)
     );
     this.calculatePagination();
   }
@@ -75,7 +75,10 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
-  getInitials(fullName: string): string {
+  getInitials(fullName: string | null | undefined): string {
+    if (!fullName) {
+      return 'NA'; // Default initials for null or undefined names
+    }
     const names = fullName.split(' ');
     const initials = names.map((n) => n[0]).join('');
     return initials.toUpperCase();
